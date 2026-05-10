@@ -18,12 +18,13 @@
     // 3 system_layer       Bluetooth, output, RGB, Studio, reset/bootloader
     // 4 mouse_media_layer  left-hand mouse buttons, right-hand media controls
     // -------------------------------------------------------------------------
-
     // -------------------------------------------------------------------------
     // Behaviors
     // -------------------------------------------------------------------------
+
     behaviors {
         // Caps Word combo behavior.
+
         CAPSWord_v1: CAPSWord_v1 {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -32,6 +33,7 @@
         };
 
         // Home-row mods are split by side/finger so each can tune timing and opposite-hand triggers.
+
         HRM_left_index_v1: HRM_left_index_v1 {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -161,10 +163,12 @@
     // -------------------------------------------------------------------------
     // Combos
     // -------------------------------------------------------------------------
+
     combos {
         compatible = "zmk,combos";
 
         // Bottom thumb row pair.
+
         capsword {
             bindings = <&CAPSWord_v1 LSHIFT 0>;
             key-positions = <52 57>;
@@ -174,6 +178,7 @@
     // -------------------------------------------------------------------------
     // Macros
     // -------------------------------------------------------------------------
+
     macros {
         cur_UNDO_v1: cur_UNDO_v1 {
             label = "&CUR_UNDO_V1";
@@ -203,6 +208,7 @@
     // -------------------------------------------------------------------------
     // Keymap
     // -------------------------------------------------------------------------
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -222,15 +228,16 @@
         //                                                   |-------+-------+-------+-------+-------+-------|
         //                                                   | SYM/B | NUM/D |  SYS  |  SYS  | M/E   | SYM/SP|
         //                                                   `-----------------------------------------------'
+
         base_layer {
             bindings = <
-&kp GRAVE   &kp N1                     &kp N2                    &kp N3                      &kp N4                       &kp N5                              &kp N6              &kp N7                             &kp N8                       &kp N9                     &kp N0                         &kp PRINTSCREEN
-&kp TAB     &kp Q                      &kp W                     &kp E                       &kp R                        &kp T                               &kp Y               &kp U                              &kp I                        &kp O                      &kp P                          &kp BSLH
-&kp ESCAPE  &HRM_left_pinky_v1 LGUI A  &HRM_left_ring_v1 LALT S  &HRM_left_middy_v1 LCTRL D  &HRM_left_index_v1 LSHIFT F  &kp G                               &kp H               &HRM_right_index_v1 RIGHT_SHIFT J  &HRM_right_middy_v1 RCTRL K  &HRM_right_ring_v1 RALT L  &HRM_right_pinky_v1 RGUI SEMI  &kp SQT
-&kp LSHFT   &kp Z                      &kp X                     &kp C                       &kp V                        &kp B                               &kp N               &kp M                              &kp COMMA                    &kp DOT                    &kp FSLH                       &kp RSHFT
-                                       &kp LEFT                  &kp RIGHT                                                                                                                                           &kp LEFT_BRACKET             &kp RIGHT_BRACKET
-                                                                                             &kp LEFT_SHIFT               &kp LCTRL           &kp LEFT_ALT    &kp RIGHT_ALT      &kp RIGHT_CONTROL                  &kp RIGHT_SHIFT
-                                                                                             &thumb_v1 1 BACKSPACE        &thumb_v1 2 DELETE  &mo 3           &mo 3              &thumb_v1 4 ENTER                  &space_v1 1 SPACE
+&kp GRAVE   &kp N1                     &kp N2                    &kp N3                      &kp N4                       &kp N5                              &kp N6         &kp N7                             &kp N8                       &kp N9                     &kp N0                         &kp PRINTSCREEN
+&kp TAB     &kp Q                      &kp W                     &kp E                       &kp R                        &kp T                               &kp Y          &kp U                              &kp I                        &kp O                      &kp P                          &kp BSLH
+&kp ESCAPE  &HRM_left_pinky_v1 LGUI A  &HRM_left_ring_v1 LALT S  &HRM_left_middy_v1 LCTRL D  &HRM_left_index_v1 LSHIFT F  &kp G                               &kp H          &HRM_right_index_v1 RIGHT_SHIFT J  &HRM_right_middy_v1 RCTRL K  &HRM_right_ring_v1 RALT L  &HRM_right_pinky_v1 RGUI SEMI  &kp SQT
+&kp LSHFT   &kp Z                      &kp X                     &kp C                       &kp V                        &kp B                               &kp N          &kp M                              &kp COMMA                    &kp DOT                    &kp FSLH                       &kp RSHFT
+                                       &kp LEFT                  &kp RIGHT                                                                                                                                      &kp LEFT_BRACKET             &kp RIGHT_BRACKET
+                                                                                             &kp LEFT_SHIFT               &kp LCTRL           &kp LEFT_ALT    &kp RIGHT_ALT  &kp RIGHT_CONTROL                  &kp RIGHT_SHIFT
+                                                                                             &thumb_v1 1 BACKSPACE        &thumb_v1 2 DELETE  &mo 3           &mo 3          &thumb_v1 4 ENTER                  &space_v1 1 SPACE
             >;
         };
 
@@ -250,15 +257,16 @@
         //                                                   |-------+-------+-------+-------+-------+-------|
         //                                                   |   %   |   :   |   @   | trans | trans | trans |
         //                                                   `-----------------------------------------------'
+
         symbols_layer {
             bindings = <
-&kp GRAVE  &kp LBKT   &kp LPAR           &kp RPAR   &kp RBKT       &kp PLUS      &trans    &trans   &trans          &trans          &trans  &trans
-&kp COMMA  &kp EXCL   &kp LBRC           &kp RBRC   &kp SEMI       &kp QMARK     &kp BSPC  &kp DEL  &cur_UNDO_v1   &cur_REDO_v1    &trans  &trans
-&kp HASH   &kp CARET  &kp EQUAL          &kp UNDER  &kp DLLR       &kp ASTRK     &kp LEFT  &kp DOWN &kp UP         &kp RIGHT       &trans  &trans
-&kp TILDE  &kp LT     &kp PIPE           &kp MINUS  &kp GT         &kp FSLH      &trans    &trans   &trans          &trans          &trans  &trans
-                      &kp DOUBLE_QUOTES  &kp SQT                                                       &trans          &trans
-                                                    &kp AMPERSAND  &kp DOT   &trans  &trans  &trans    &trans
-                                                    &kp PRCNT      &kp COLON &kp AT_SIGN  &trans  &trans &trans
+&kp GRAVE  &kp LBKT   &kp LPAR           &kp RPAR   &kp RBKT       &kp PLUS                  &trans    &trans    &trans        &trans        &trans  &trans
+&kp COMMA  &kp EXCL   &kp LBRC           &kp RBRC   &kp SEMI       &kp QMARK                 &kp BSPC  &kp DEL   &cur_UNDO_v1  &cur_REDO_v1  &trans  &trans
+&kp HASH   &kp CARET  &kp EQUAL          &kp UNDER  &kp DLLR       &kp ASTRK                 &kp LEFT  &kp DOWN  &kp UP        &kp RIGHT     &trans  &trans
+&kp TILDE  &kp LT     &kp PIPE           &kp MINUS  &kp GT         &kp FSLH                  &trans    &trans    &trans        &trans        &trans  &trans
+                      &kp DOUBLE_QUOTES  &kp SQT                                                                 &trans        &trans
+                                                    &kp AMPERSAND  &kp DOT    &trans         &trans    &trans    &trans
+                                                    &kp PRCNT      &kp COLON  &kp AT_SIGN    &trans    &trans    &trans
             >;
         };
 
@@ -278,15 +286,16 @@
         //                                                   |-------+-------+-------+-------+-------+-------|
         //                                                   | trans | trans | trans | trans |   0   |   .   |
         //                                                   `-----------------------------------------------'
+
         numbers_layer {
             bindings = <
-&trans  &kp F1  &kp F2    &kp F3       &kp F4         &kp F5            &kp F6  &kp F7  &kp F8   &kp F9  &kp F10  &kp F11
-&trans  &trans  &trans    &trans       &trans         &trans            &trans  &kp N7  &kp N8   &kp N9  &trans   &kp F12
-&trans  &trans  &trans    &trans       &trans         &trans            &trans  &kp N4  &kp N5   &kp N6  &trans   &trans
-&trans  &trans  &trans    &trans       &trans         &trans            &trans  &kp N1  &kp N2   &kp N3  &trans   &trans
-                &trans    &trans                                                        &trans   &trans
-                                       &trans         &trans  &trans    &trans  &trans  &trans
-                                       &trans         &trans  &trans    &trans  &kp N0  &kp DOT
+&trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5            &kp F6  &kp F7  &kp F8   &kp F9  &kp F10  &kp F11
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &kp N7  &kp N8   &kp N9  &trans   &kp F12
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &kp N4  &kp N5   &kp N6  &trans   &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &kp N1  &kp N2   &kp N3  &trans   &trans
+                &trans  &trans                                            &trans   &trans
+                                &trans  &trans  &trans    &trans  &trans  &trans
+                                &trans  &trans  &trans    &trans  &kp N0  &kp DOT
             >;
         };
 
@@ -306,15 +315,16 @@
         //                                                   |-------+-------+-------+-------+-------+-------|
         //                                                   | trans | trans | trans | trans | trans | trans |
         //                                                   `-----------------------------------------------'
+
         system_layer {
             bindings = <
-&bt BT_CLR   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4        &out OUT_USB    &out OUT_BLE    &battery_check   &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &to 0
-&trans       &trans        &trans        &trans        &trans        &trans              &rgb_ug RGB_HUI &rgb_ug RGB_HUD &rgb_ug RGB_SAI  &rgb_ug RGB_SAD  &rgb_ug RGB_SPI  &rgb_ug RGB_SPD
-&trans       &trans        &trans        &trans        &trans        &studio_unlock      &studio_unlock  &rgb_ug RGB_BRI &rgb_ug RGB_BRD  &trans           &trans           &trans
-&bootloader  &trans        &trans        &trans        &trans        &sys_reset          &sys_reset      &trans          &trans           &trans           &trans           &bootloader
-                            &trans        &trans                                                                                      &trans           &trans
-                                                        &trans        &trans          &trans          &trans           &trans           &trans
-                                                        &trans        &trans          &trans          &trans           &trans           &trans
+&bt BT_CLR   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4              &out OUT_USB     &out OUT_BLE     &battery_check   &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &to 0
+&trans       &trans        &trans        &trans        &trans        &trans                    &rgb_ug RGB_HUI  &rgb_ug RGB_HUD  &rgb_ug RGB_SAI  &rgb_ug RGB_SAD  &rgb_ug RGB_SPI  &rgb_ug RGB_SPD
+&trans       &trans        &trans        &trans        &trans        &studio_unlock            &studio_unlock   &rgb_ug RGB_BRI  &rgb_ug RGB_BRD  &trans           &trans           &trans
+&bootloader  &trans        &trans        &trans        &trans        &sys_reset                &sys_reset       &trans           &trans           &trans           &trans           &bootloader
+                           &trans        &trans                                                                                  &trans           &trans
+                                                       &trans        &trans          &trans    &trans           &trans           &trans
+                                                       &trans        &trans          &trans    &trans           &trans           &trans
             >;
         };
 
@@ -334,15 +344,16 @@
         //                                                   |-------+-------+-------+-------+-------+-------|
         //                                                   | trans | trans | trans | trans | trans | trans |
         //                                                   `-----------------------------------------------'
+
         mouse_media_layer {
             bindings = <
-&trans             &trans  &trans     &trans     &trans     &trans            &trans             &trans             &trans           &trans           &trans  &trans
-&trans             &trans  &trans     &trans     &trans     &trans            &trans             &trans             &trans           &trans           &trans  &trans
-&trans             &trans  &mkp RCLK  &mkp MCLK  &mkp LCLK  &trans            &kp C_PREVIOUS     &kp C_PLAY_PAUSE   &kp C_NEXT       &trans           &trans  &trans
-&trans             &trans  &trans     &trans     &trans     &trans            &kp K_MUTE         &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &trans           &trans  &trans
-                           &trans     &trans                                                                       &trans           &trans
-                                             &trans     &trans  &trans    &trans             &trans            &trans
-                                             &trans     &trans  &trans    &trans             &trans            &trans
+&trans  &trans  &trans     &trans     &trans     &trans            &trans  &trans        &trans           &trans      &trans  &trans
+&trans  &trans  &trans     &trans     &trans     &trans            &trans  &kp C_VOL_DN  &kp C_VOLUME_UP  &kp K_MUTE  &trans  &trans
+&trans  &trans  &mkp RCLK  &mkp MCLK  &mkp LCLK  &trans            &trans  &kp C_PREV    &kp C_PP         &kp C_NEXT  &trans  &trans
+&trans  &trans  &trans     &trans     &trans     &trans            &trans  &trans        &trans           &trans      &trans  &trans
+                &trans     &trans                                                        &trans           &trans
+                                      &trans     &trans  &trans    &trans  &trans        &trans
+                                      &trans     &trans  &trans    &trans  &trans        &trans
             >;
         };
     };
@@ -351,8 +362,8 @@
 // -----------------------------------------------------------------------------
 // Trackball Processing
 // -----------------------------------------------------------------------------
-
 // The central trackball scrolls by default.
+
 &trackball_central_listener {
     input-processors =
         <&zip_xy_scaler 1 16>,
@@ -361,4 +372,5 @@
 };
 
 // The peripheral trackball temporarily activates the mouse/media layer.
+
 &trackball_peripheral_listener { input-processors = <&zip_temp_layer 4 500>; };
