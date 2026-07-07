@@ -8,7 +8,7 @@
 #include <dt-bindings/zmk/rgb.h>
 
 / {
-    chosen { zmk,matrix-transform = &imprint_number_row; };
+    chosen { zmk,physical-layout = &physical_layout_imprint_number_row; };
 
     // -------------------------------------------------------------------------
     // Layer map:
@@ -16,7 +16,8 @@
     // 1 symbols_layer      symbols on left, light editing/navigation on right
     // 2 numbers_layer      F-keys and right-hand numpad
     // 3 system_layer       Bluetooth, output, RGB, Studio, reset/bootloader
-    // 4 mouse_media_layer  left-hand mouse buttons, right-hand media controls
+    // 4 mouse_layer        left-hand mouse buttons
+    // 5 media_layer        right-hand media controls
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
     // Behaviors
@@ -212,7 +213,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Base typing layer. Thumb holds: symbols, numbers, system, and mouse/media.
+        // Base typing layer. Thumb holds: symbols, numbers, system, media, and mouse.
         // ,-------------------------------------------------.                 ,-------------------------------------------------.
         // |   `   |   1   |   2   |   3   |   4   |   5   |                 |   6   |   7   |   8   |   9   |   0   |  PSCR |
         // |-------+-------+-------+-------+-------+-------|                 |-------+-------+-------+-------+-------+-------|
@@ -226,7 +227,7 @@
         //                 `---------------'                 ,-------------------------------. `---------------'
         //                                                   | LSHFT | LCTRL | LALT  | RALT  | RCTRL | RSHFT |
         //                                                   |-------+-------+-------+-------+-------+-------|
-        //                                                   | SYM/B | NUM/D |  SYS  |  SYS  | M/E   | SYM/SP|
+        //                                                   | SYM/B | NUM/D |  SYS  | MEDIA | MED/E | SYM/SP|
         //                                                   `-----------------------------------------------'
 
         base_layer {
@@ -237,7 +238,7 @@
 &kp LSHFT   &kp Z                      &kp X                     &kp C                       &kp V                        &kp B                               &kp N          &kp M                              &kp COMMA                    &kp DOT                    &kp FSLH                       &kp RSHFT
                                        &kp LEFT                  &kp RIGHT                                                                                                                                      &kp LEFT_BRACKET             &kp RIGHT_BRACKET
                                                                                              &kp LEFT_SHIFT               &kp LCTRL           &kp LEFT_ALT    &kp RIGHT_ALT  &kp RIGHT_CONTROL                  &kp RIGHT_SHIFT
-                                                                                             &thumb_v1 1 BACKSPACE        &thumb_v1 2 DELETE  &mo 3           &mo 3          &thumb_v1 4 ENTER                  &space_v1 1 SPACE
+                                                                                             &thumb_v1 1 BACKSPACE        &thumb_v1 2 DELETE  &mo 3           &mo 5          &thumb_v1 5 ENTER                  &space_v1 1 SPACE
             >;
         };
 
@@ -328,15 +329,15 @@
             >;
         };
 
-        // Auto-mouse layer: left half mouse buttons, right half media controls.
+        // Auto-mouse layer: left half mouse buttons only.
         // ,-------------------------------------------------.                 ,-------------------------------------------------.
         // | trans | trans | trans | trans | trans | trans |                 | trans | trans | trans | trans | trans | trans |
         // |-------+-------+-------+-------+-------+-------|                 |-------+-------+-------+-------+-------+-------|
         // | trans | trans | trans | trans | trans | trans |                 | trans | trans | trans | trans | trans | trans |
         // |-------+-------+-------+-------+-------+-------|                 |-------+-------+-------+-------+-------+-------|
-        // | trans | trans | RCLK  | MCLK  | LCLK  | trans |                 | PREV  | PLAY  | NEXT  | trans | trans | trans |
+        // | trans | trans | RCLK  | MCLK  | LCLK  | trans |                 | trans | trans | trans | trans | trans | trans |
         // |-------+-------+-------+-------+-------+-------|                 |-------+-------+-------+-------+-------+-------|
-        // | trans | trans | trans | trans | trans | trans |                 | MUTE  | VOL-  | VOL+  | trans | trans | trans |
+        // | trans | trans | trans | trans | trans | trans |                 | trans | trans | trans | trans | trans | trans |
         // `---------------+-------+-------+---------------'                 `---------------+-------+-------+---------------'
         //                 | trans | trans |                                                   | trans | trans |
         //                 `---------------'                 ,-------------------------------. `---------------'
@@ -345,15 +346,44 @@
         //                                                   | trans | trans | trans | trans | trans | trans |
         //                                                   `-----------------------------------------------'
 
-        mouse_media_layer {
+        mouse_layer {
             bindings = <
-&trans  &trans  &trans     &trans     &trans     &trans            &trans  &trans        &trans           &trans      &trans  &trans
-&trans  &trans  &trans     &trans     &trans     &trans            &trans  &kp C_VOL_DN  &kp C_VOLUME_UP  &kp K_MUTE  &trans  &trans
-&trans  &trans  &mkp RCLK  &mkp MCLK  &mkp LCLK  &trans            &trans  &kp C_PREV    &kp C_PP         &kp C_NEXT  &trans  &trans
-&trans  &trans  &trans     &trans     &trans     &trans            &trans  &trans        &trans           &trans      &trans  &trans
-                &trans     &trans                                                        &trans           &trans
-                                      &trans     &trans  &trans    &trans  &trans        &trans
-                                      &trans     &trans  &trans    &trans  &trans        &trans
+&trans  &trans  &trans     &trans     &trans     &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans     &trans     &trans     &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &mkp RCLK  &mkp MCLK  &mkp LCLK  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans     &trans     &trans     &trans            &trans  &trans  &trans  &trans  &trans  &trans
+                &trans     &trans                                      &trans  &trans
+                                      &trans     &trans  &trans    &trans  &trans  &trans
+                                      &trans     &trans  &trans    &trans  &trans  &trans
+            >;
+        };
+
+        // Media layer: right-hand media controls only.
+        // ,-------------------------------------------------.                 ,-------------------------------------------------.
+        // | trans | trans | trans | trans | trans | trans |                 | trans | trans | trans | trans | trans | trans |
+        // |-------+-------+-------+-------+-------+-------|                 |-------+-------+-------+-------+-------+-------|
+        // | trans | trans | trans | trans | trans | trans |                 | trans | VOL-  | VOL+  | MUTE  | trans | trans |
+        // |-------+-------+-------+-------+-------+-------|                 |-------+-------+-------+-------+-------+-------|
+        // | trans | trans | trans | trans | trans | trans |                 | trans | PREV  | PLAY  | NEXT  | trans | trans |
+        // |-------+-------+-------+-------+-------+-------|                 |-------+-------+-------+-------+-------+-------|
+        // | trans | trans | trans | trans | trans | trans |                 | trans | trans | trans | trans | trans | trans |
+        // `---------------+-------+-------+---------------'                 `---------------+-------+-------+---------------'
+        //                 | trans | trans |                                                   | trans | trans |
+        //                 `---------------'                 ,-------------------------------. `---------------'
+        //                                                   | trans | trans | trans | trans | trans | trans |
+        //                                                   |-------+-------+-------+-------+-------+-------|
+        //                                                   | trans | trans | trans | trans | trans | trans |
+        //                                                   `-----------------------------------------------'
+
+        media_layer {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans        &trans           &trans      &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &kp C_VOL_DN  &kp C_VOLUME_UP  &kp K_MUTE  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &kp C_PREV    &kp C_PP         &kp C_NEXT  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans        &trans           &trans      &trans  &trans
+                &trans  &trans                                                        &trans      &trans
+                                &trans  &trans  &trans    &trans  &trans        &trans
+                                &trans  &trans  &trans    &trans  &trans        &trans
             >;
         };
     };
@@ -371,6 +401,6 @@
         <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
 };
 
-// The peripheral trackball temporarily activates the mouse/media layer.
+// The peripheral trackball temporarily activates the mouse layer.
 
 &trackball_peripheral_listener { input-processors = <&zip_temp_layer 4 500>; };
